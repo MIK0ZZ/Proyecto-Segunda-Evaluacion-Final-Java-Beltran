@@ -22,12 +22,7 @@ public class Main {
         System.out.println("Bienvenide a Simon dice!");
         
         Scanner sc = new Scanner(System.in);
-        System.out.print("¿Cual es tu nombre?: ");
-        String name = sc.next();
-
-        Player player = new Player();
-
-        player.setName(name);
+        
 
         engine.play(ended);
         sc.close();

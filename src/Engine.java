@@ -18,7 +18,7 @@ public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO}
 
-    private final int MAX_COLORES_SEQ = 12;
+    private final int MAX_COLORES_SEQ = 4;
     
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
 
@@ -27,6 +27,11 @@ public class Engine {
 
 
 
+    
+    /** 
+     * @param _color
+     * @return tColores
+     */
     public tColores charToColor(String _color) {
 
         this.color = _color.toLowerCase();
@@ -86,21 +91,30 @@ public class Engine {
 
         _ended = false;
 
-        int ronda = 0;
+        
 
-        boolean fallo = false;
+        
 
         Scanner sc = new Scanner(System.in);
 
         Player player = new Player();
 
         while(_ended == false) {
+
+            boolean acabar = false;
+            int ronda = 0;
+
+            System.out.print("¿Cual es tu nombre?: ");
+            String name = sc.next();
+
+            player.setName(name);
             System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
             pressENTER();
             clearScreen();
             generarSecuenca();
 
-            while(fallo == false) {
+            while(acabar == false) {
+
                 System.out.print("Memoriza esta secuencia: ");
                 mostrarSecuencia(ronda);
                 pressENTER();
@@ -111,20 +125,32 @@ public class Engine {
                     System.out.print((i+1) + ": ");
                     String answer = sc.next();
                     if(comprobarColor(i, charToColor(answer)) != true) {
-                        fallo = true;
+                        acabar = true;
+                        break;
                     }
                     
                 } 
+                clearScreen();
 
-                if(ronda == MAX_COLORES_SEQ) {
-                    break;
+                if((ronda + 3) == MAX_COLORES_SEQ) {
+                    acabar = true;
                 } else {
                     ronda += 1;
                 }
             }
-            System.out.println("--HAS FALLADO--");
-            pressENTER();
-            clearScreen();
+
+            if((ronda + 3) == MAX_COLORES_SEQ) {
+                System.out.println("--HAS GANADO--");
+                pressENTER();
+                clearScreen();
+                ronda = 0;
+            } else {
+                System.out.println("--HAS FALLADO--");
+                pressENTER();
+                clearScreen();
+            }
+
+            
             
 
         }
