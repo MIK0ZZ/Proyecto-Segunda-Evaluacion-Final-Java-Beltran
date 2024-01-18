@@ -16,6 +16,7 @@ public class Main {
 
         Engine engine = new Engine();
 
+        boolean ended = false;
 
         clearScreen();
         System.out.println("Bienvenide a Simon dice!");
@@ -28,7 +29,7 @@ public class Main {
 
         player.setName(name);
 
-        engine.play();
+        engine.play(ended);
         sc.close();
 
     }

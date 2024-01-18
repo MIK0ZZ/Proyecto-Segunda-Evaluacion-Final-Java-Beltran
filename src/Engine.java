@@ -24,7 +24,6 @@ public class Engine {
 
     private String color = "";
 
-    private boolean ended = false;
 
 
 
@@ -83,24 +82,49 @@ public class Engine {
         }
     }
 
-    public void play() {
+    public void play(boolean _ended) {
+
+        _ended = false;
+
+        int ronda = 0;
+
+        boolean fallo = false;
 
         Scanner sc = new Scanner(System.in);
 
         Player player = new Player();
 
-        while(ended = false) {
+        while(_ended == false) {
             System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
             pressENTER();
             clearScreen();
             generarSecuenca();
 
-            while (ended == false) {
+            while(fallo == false) {
                 System.out.print("Memoriza esta secuencia: ");
-                mostrarSecuencia(3);
+                mostrarSecuencia(ronda);
                 pressENTER();
                 clearScreen();
+                System.out.println("Tu respuesta: [r/v/a/d]: ");
+                for(int i = 0; i < ronda + 3; i++) {
+                
+                    System.out.print((i+1) + ": ");
+                    String answer = sc.next();
+                    if(comprobarColor(i, charToColor(answer)) != true) {
+                        fallo = true;
+                    }
+                    
+                } 
+
+                if(ronda == MAX_COLORES_SEQ) {
+                    break;
+                } else {
+                    ronda += 1;
+                }
             }
+            System.out.println("--HAS FALLADO--");
+            pressENTER();
+            clearScreen();
             
 
         }
