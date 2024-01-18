@@ -31,6 +31,7 @@ public class Engine {
     /** 
      * @param _color
      * @return tColores
+     * Transforma el caracter de entrada en un color
      */
     public tColores charToColor(String _color) {
 
@@ -51,6 +52,9 @@ public class Engine {
 
     }
 
+    /**
+     * Genera la secuencia
+     */
     public void generarSecuenca() {
         for(int i = 0; i < secuenciaColores.length; i++) {
             int n = randomN.nextInt(0,4);
@@ -71,6 +75,11 @@ public class Engine {
         }
     }
 
+    
+    /** 
+     * @param _numero
+     * Muestra la secuencia de la ronda
+     */
     public void mostrarSecuencia(int _numero) {
         System.out.print("[");
         for(int i = 0; i < _numero + 3; i++) {
@@ -79,6 +88,13 @@ public class Engine {
         System.out.print("]");
     }
 
+    /**
+     * @param _i
+     * @param _color
+     * @return
+     * 
+     * Comprueba cada color en la secuencia
+     */
     public boolean comprobarColor(int _i, tColores _color) {
         if(_color == secuenciaColores[_i]) {
             return true;
@@ -87,6 +103,10 @@ public class Engine {
         }
     }
 
+    /**
+     * @param _ended
+     * Ejecución del juego
+     */
     public void play(boolean _ended) {
 
         _ended = false;
