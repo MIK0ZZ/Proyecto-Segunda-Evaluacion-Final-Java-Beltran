@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
 
     public static void clearScreen() {  
@@ -11,6 +13,23 @@ public class Main {
         System.console().readLine();
     }
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+
+        Engine engine = new Engine();
+
+
+        clearScreen();
+        System.out.println("Bienvenide a Simon dice!");
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.print("¿Cual es tu nombre?: ");
+        String name = sc.next();
+
+        Player player = new Player();
+
+        player.setName(name);
+
+        engine.play();
+        sc.close();
+
     }
 }
