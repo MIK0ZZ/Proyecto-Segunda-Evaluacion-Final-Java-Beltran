@@ -113,7 +113,11 @@ public class Engine {
             clearScreen();
             generarSecuenca();
 
+            int puntos = 0;
+
             while(acabar == false) {
+
+                puntos = 0;
 
                 System.out.print("Memoriza esta secuencia: ");
                 mostrarSecuencia(ronda);
@@ -124,26 +128,32 @@ public class Engine {
                 
                     System.out.print((i+1) + ": ");
                     String answer = sc.next();
-                    if(comprobarColor(i, charToColor(answer)) != true) {
-                        acabar = true;
+                    if(comprobarColor(i, charToColor(answer)) == true) {
+                        puntos += 1;
+                    } else {
                         break;
                     }
                     
                 } 
                 clearScreen();
-
-                if((ronda + 3) == MAX_COLORES_SEQ) {
+                if(puntos != (ronda + 3)) {
                     acabar = true;
                 } else {
-                    ronda += 1;
+                    if(puntos == MAX_COLORES_SEQ) {
+                        acabar = true;
+                    } else {
+                        ronda += 1;
+                    }
+                    
                 }
+
+    
             }
 
-            if((ronda + 3) == MAX_COLORES_SEQ) {
+            if(puntos == MAX_COLORES_SEQ) {
                 System.out.println("--HAS GANADO--");
                 pressENTER();
                 clearScreen();
-                ronda = 0;
             } else {
                 System.out.println("--HAS FALLADO--");
                 pressENTER();
