@@ -29,11 +29,19 @@ public class Engine {
         switch(color.charAt(0)) {
             case 'r':
                 return tColores.ROJO;
+            case '1':
+                return tColores.ROJO;
             case 'v':
+                return tColores.VERDE;
+            case '2':
                 return tColores.VERDE;
             case 'a':
                 return tColores.AZUL;
+            case '3':
+                return tColores.AZUL;
             case 'd':
+                return tColores.DORADO;
+            case '4':
                 return tColores.DORADO;
             default:
                 return null;
@@ -43,7 +51,7 @@ public class Engine {
     /**
      * Genera la secuencia
      */
-    public void generarSecuenca() {
+    public void generarSecuencia() {
         for(int i = 0; i < secuenciaColores.length; i++) {
             int n = randomN.nextInt(0,4);
             switch(n) {
@@ -93,7 +101,7 @@ public class Engine {
 
     /**
      * @param _ended
-     * Ejecución del juego
+     * Ejecucion del juego
      */
     public void play(boolean _ended) {
 
@@ -107,13 +115,21 @@ public class Engine {
             int ronda = 0;
             int puntos = 0;
 
-            System.out.print("¿Cual es tu nombre?: ");
+            System.out.print("Cual es tu nombre?: ");
             String name = sc.next();
             player.setName(name);
-            System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
+            clearScreen();
+            System.out.println("¿Qué desea hacer?: ");
+            System.out.println("[1] Jugar");
+            System.out.println("[X] Salir");
+            System.out.print("Respuesta: ");
+            String opcion = sc.next();
+
+            if(opcion.charAt(0) == '1') {
+                System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
             pressENTER();
             clearScreen();
-            generarSecuenca();
+            generarSecuencia();
 
             while(acabar == false) {
                 puntos = 0;
@@ -151,6 +167,12 @@ public class Engine {
                 pressENTER();
                 clearScreen();
             }
+            } else {
+                _ended = true;
+            }
+
+
+            
         }
         sc.close();
     }

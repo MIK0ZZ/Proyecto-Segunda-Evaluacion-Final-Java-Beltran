@@ -14,7 +14,7 @@ public class Main {
     public static void pressENTER() {
         System.console().readLine();
     }
-    /** 
+    /**
      * @param args
      * @throws Exception
      */
