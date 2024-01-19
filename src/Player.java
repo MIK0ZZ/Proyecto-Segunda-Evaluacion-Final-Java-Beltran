@@ -4,8 +4,6 @@ public class Player {
     public Player() {
         
     }
-
-    
     /** 
      * @param _name
      * Escribe el nombre del usuario

@@ -3,12 +3,15 @@ import java.util.Scanner;
 
 public class Engine {
 
+    enum tColores {ROJO, VERDE, AZUL, DORADO}
+    private final int MAX_COLORES_SEQ = 12;
+    private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
+    private String color = "";
+
     public static void clearScreen() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
     }  
-
-    
 
     public static void pressENTER() {
         System.console().readLine();
@@ -16,27 +19,13 @@ public class Engine {
 
     Random randomN = new Random();
 
-    enum tColores {ROJO, VERDE, AZUL, DORADO}
-
-    private final int MAX_COLORES_SEQ = 12;
-    
-    private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
-
-    private String color = "";
-
-
-
-
-    
     /** 
      * @param _color
      * @return tColores
      * Transforma el caracter de entrada en un color
      */
     public tColores charToColor(String _color) {
-
         this.color = _color.toLowerCase();
-
         switch(color.charAt(0)) {
             case 'r':
                 return tColores.ROJO;
@@ -49,7 +38,6 @@ public class Engine {
             default:
                 return null;
         }
-
     }
 
     /**
@@ -111,41 +99,30 @@ public class Engine {
 
         _ended = false;
 
-        
-
-        
-
         Scanner sc = new Scanner(System.in);
-
         Player player = new Player();
-
+        
         while(_ended == false) {
-
             boolean acabar = false;
             int ronda = 0;
+            int puntos = 0;
 
             System.out.print("¿Cual es tu nombre?: ");
             String name = sc.next();
-
             player.setName(name);
             System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
             pressENTER();
             clearScreen();
             generarSecuenca();
 
-            int puntos = 0;
-
             while(acabar == false) {
-
                 puntos = 0;
-
                 System.out.print("Memoriza esta secuencia: ");
                 mostrarSecuencia(ronda);
                 pressENTER();
                 clearScreen();
                 System.out.println("Tu respuesta: [r/v/a/d]: ");
                 for(int i = 0; i < ronda + 3; i++) {
-                
                     System.out.print((i+1) + ": ");
                     String answer = sc.next();
                     if(comprobarColor(i, charToColor(answer)) == true) {
@@ -153,7 +130,6 @@ public class Engine {
                     } else {
                         break;
                     }
-                    
                 } 
                 clearScreen();
                 if(puntos != (ronda + 3)) {
@@ -164,12 +140,8 @@ public class Engine {
                     } else {
                         ronda += 1;
                     }
-                    
                 }
-
-    
             }
-
             if(puntos == MAX_COLORES_SEQ) {
                 System.out.println("--HAS GANADO--");
                 pressENTER();
@@ -179,10 +151,6 @@ public class Engine {
                 pressENTER();
                 clearScreen();
             }
-
-            
-            
-
         }
         sc.close();
     }
