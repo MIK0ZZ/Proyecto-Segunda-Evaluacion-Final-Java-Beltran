@@ -18,7 +18,7 @@ public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO}
 
-    private final int MAX_COLORES_SEQ = 4;
+    private final int MAX_COLORES_SEQ = 12;
     
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
 
