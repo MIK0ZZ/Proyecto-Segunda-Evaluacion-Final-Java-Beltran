@@ -22,15 +22,17 @@ public class Main {
 
         Engine engine = new Engine();
 
-        boolean ended = false;
+        boolean fallo = false;
+        boolean stop = false;
 
         clearScreen();
         System.out.println("Bienvenide a Simon dice!");
         
         Scanner sc = new Scanner(System.in);
         
+        engine.start(stop);
 
-        engine.play(ended);
+        engine.play(fallo);
         sc.close();
 
     }

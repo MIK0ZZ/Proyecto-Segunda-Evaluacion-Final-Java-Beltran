@@ -4,8 +4,11 @@ import java.util.Scanner;
 public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO}
+    enum tColoresHard {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
     private final int MAX_COLORES_SEQ = 12;
+    private final int MAX_COLORES_SEQ_HARD = 15;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
+    private tColoresHard[] secuenciaColoresHard = new tColoresHard[MAX_COLORES_SEQ_HARD];
     private String color = "";
 
     public static void clearScreen() {  
@@ -71,6 +74,35 @@ public class Engine {
         }
     }
 
+    public void generarSecuenciaHard() {
+        for(int i = 0; i < secuenciaColores.length; i++) {
+            int n = randomN.nextInt(0,7);
+            switch(n) {
+                case 0:
+                    secuenciaColoresHard[i] = tColoresHard.ROJO;
+                    break;
+                case 1:
+                    secuenciaColoresHard[i] = tColoresHard.VERDE;
+                    break;
+                case 2:
+                    secuenciaColoresHard[i] = tColoresHard.AZUL;
+                    break;
+                case 3:
+                    secuenciaColoresHard[i] = tColoresHard.DORADO;
+                    break;
+                case 4:
+                    secuenciaColoresHard[i] = tColoresHard.BLANCO;
+                    break;
+                case 5:
+                    secuenciaColoresHard[i] = tColoresHard.MARRON;
+                    break;
+                case 6:
+                    secuenciaColoresHard[i] = tColoresHard.NARANJA;
+                    break;
+            }
+        }
+    }
+
     
     /** 
      * @param _numero
@@ -80,6 +112,14 @@ public class Engine {
         System.out.print("[");
         for(int i = 0; i < _numero + 3; i++) {
             System.out.print(secuenciaColores[i] + "-");
+        }
+        System.out.print("]");
+    }
+
+    public void mostrarSecuenciaHard(int _numero) {
+        System.out.print("[");
+        for(int i = 0; i < _numero + 3; i++) {
+            System.out.print(secuenciaColoresHard[i] + "-");
         }
         System.out.print("]");
     }
@@ -99,23 +139,11 @@ public class Engine {
         }
     }
 
-    /**
-     * @param _ended
-     * Ejecucion del juego
-     */
-    public void play(boolean _ended) {
-
-        _ended = false;
-
+    public void start(boolean _stop) {
         Scanner sc = new Scanner(System.in);
         Player player = new Player();
-        
-        while(_ended == false) {
-            boolean acabar = false;
-            int ronda = 0;
-            int puntos = 0;
 
-            System.out.print("Cual es tu nombre?: ");
+        System.out.print("Cual es tu nombre?: ");
             String name = sc.next();
             player.setName(name);
             clearScreen();
@@ -125,12 +153,40 @@ public class Engine {
             System.out.println("[X] Salir");
             System.out.print("Respuesta: ");
             String opcion = sc.next();
+            sc.close();
 
             if(opcion.charAt(0) == '1') {
                 System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
-            pressENTER();
-            clearScreen();
-            generarSecuencia();
+                pressENTER();
+                clearScreen();
+                generarSecuencia();
+            } else if (opcion.charAt(0) == '2') {
+                System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar en modo difícil.");
+                pressENTER();
+                clearScreen();
+                generarSecuenciaHard();
+            } else {
+                _stop = true;
+            }
+
+
+    }
+
+    /**
+     * @param _fallo
+     * Ejecucion del juego
+     */
+    public void play(boolean _fallo) {
+
+        _fallo = false;
+
+        Scanner sc = new Scanner(System.in);
+       
+        
+        while(_fallo == false) {
+            boolean acabar = false;
+            int ronda = 0;
+            int puntos = 0;
 
                 while(acabar == false) {
                     puntos = 0;
@@ -161,17 +217,13 @@ public class Engine {
                 }
                 if(puntos == MAX_COLORES_SEQ) {
                     System.out.println("--HAS GANADO--");
-                    pressENTER();
-                    clearScreen();
                 } else {
                     System.out.println("--HAS FALLADO--");
-                    pressENTER();
-                    clearScreen();
                 }
+                pressENTER();
+                    clearScreen();
 
-            } else {
-                _ended = true;
-            }
+            
 
 
             
