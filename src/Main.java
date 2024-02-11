@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 public class Main {
     /**
@@ -27,11 +27,7 @@ public class Main {
         clearScreen();
         System.out.println("Bienvenide a Simon dice!");
         
-        Scanner sc = new Scanner(System.in);
-        
         engine.start(stop);
         
-        sc.close();
-
     }
 }

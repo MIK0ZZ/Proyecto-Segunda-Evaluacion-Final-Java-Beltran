@@ -153,12 +153,17 @@ public class Engine {
     }
 
     public void start(boolean _stop) {
+
+        _stop = false;
+
         Scanner sc = new Scanner(System.in);
         Player player = new Player();
 
         while (_stop == false) {
+            String name = "";
+            
             System.out.print("Cual es tu nombre?: ");
-            String name = sc.next();
+            name = sc.next();
             player.setName(name);
             clearScreen();
             System.out.println("¿Qué desea hacer?: ");
@@ -167,24 +172,27 @@ public class Engine {
             System.out.println("[X] Salir");
             System.out.print("Respuesta: ");
             String opcion = sc.next();
-            
 
-            if(opcion.charAt(0) == '1') {
-                System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
-                pressENTER();
-                clearScreen();
-                generarSecuencia();
-                play(_stop, difficulty);
-            } else if (opcion.charAt(0) == '2') {
-                System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar en modo difícil.");
-                pressENTER();
-                clearScreen();
-                hardMode();
-                generarSecuencia();
-                play(_stop, difficulty);
-            } else {
-                _stop = true;
+            switch(opcion.charAt(0)) {
+                case '1':
+                    System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
+                    pressENTER();
+                    clearScreen();
+                    generarSecuencia();
+                    play(_stop, difficulty, sc);
+                    break;
+                case '2':
+                    System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar en modo difícil.");
+                    pressENTER();
+                    clearScreen();
+                    hardMode();
+                    generarSecuencia();
+                    play(_stop, difficulty, sc);
+                    break;
+                default:
+                    _stop = true;
             }
+            
             
         }
         sc.close();
@@ -197,9 +205,9 @@ public class Engine {
      * @param _fallo
      * Ejecucion del juego
      */
-    public void play(boolean _stop, tModo difficulty) {
+    public void play(boolean _stop, tModo difficulty, Scanner sc) {
 
-        Scanner sc = new Scanner(System.in);
+        
         boolean acabar = false;
         int ronda = 0;
         int puntos = 0;
@@ -221,6 +229,7 @@ public class Engine {
                 }
             } 
             clearScreen();
+            
             if(puntos != (ronda + 3)) {
                 acabar = true;
             } else {
@@ -256,8 +265,8 @@ public class Engine {
         
         pressENTER();
         clearScreen();
-        _stop = true;
-        sc.close();
-    }
+        
+        
+    } 
 
 }
