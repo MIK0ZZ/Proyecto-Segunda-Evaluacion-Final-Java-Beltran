@@ -121,6 +121,7 @@ public class Engine {
             clearScreen();
             System.out.println("¿Qué desea hacer?: ");
             System.out.println("[1] Jugar");
+            System.out.println("[2] Jugar en dificil");
             System.out.println("[X] Salir");
             System.out.print("Respuesta: ");
             String opcion = sc.next();
@@ -131,42 +132,43 @@ public class Engine {
             clearScreen();
             generarSecuencia();
 
-            while(acabar == false) {
-                puntos = 0;
-                System.out.print("Memoriza esta secuencia: ");
-                mostrarSecuencia(ronda);
-                pressENTER();
-                clearScreen();
-                System.out.println("Tu respuesta: [r/v/a/d]: ");
-                for(int i = 0; i < ronda + 3; i++) {
-                    System.out.print((i+1) + ": ");
-                    String answer = sc.next();
-                    if(comprobarColor(i, charToColor(answer)) == true) {
-                        puntos += 1;
-                    } else {
-                        break;
-                    }
-                } 
-                clearScreen();
-                if(puntos != (ronda + 3)) {
-                    acabar = true;
-                } else {
-                    if(puntos == MAX_COLORES_SEQ) {
+                while(acabar == false) {
+                    puntos = 0;
+                    System.out.print("Memoriza esta secuencia: ");
+                    mostrarSecuencia(ronda);
+                    pressENTER();
+                    clearScreen();
+                    System.out.println("Tu respuesta: [r/v/a/d]: ");
+                    for(int i = 0; i < ronda + 3; i++) {
+                        System.out.print((i+1) + ": ");
+                        String answer = sc.next();
+                        if(comprobarColor(i, charToColor(answer)) == true) {
+                            puntos += 1;
+                        } else {
+                            break;
+                        }
+                    } 
+                    clearScreen();
+                    if(puntos != (ronda + 3)) {
                         acabar = true;
                     } else {
-                        ronda += 1;
+                        if(puntos == MAX_COLORES_SEQ) {
+                            acabar = true;
+                        } else {
+                            ronda += 1;
+                        }
                     }
                 }
-            }
-            if(puntos == MAX_COLORES_SEQ) {
-                System.out.println("--HAS GANADO--");
-                pressENTER();
-                clearScreen();
-            } else {
-                System.out.println("--HAS FALLADO--");
-                pressENTER();
-                clearScreen();
-            }
+                if(puntos == MAX_COLORES_SEQ) {
+                    System.out.println("--HAS GANADO--");
+                    pressENTER();
+                    clearScreen();
+                } else {
+                    System.out.println("--HAS FALLADO--");
+                    pressENTER();
+                    clearScreen();
+                }
+
             } else {
                 _ended = true;
             }
