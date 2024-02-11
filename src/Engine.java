@@ -10,6 +10,7 @@ public class Engine {
     private String color = "";
     enum tModo {FACIL, DIFICIL}
     private tModo difficulty = tModo.FACIL;
+    private int nAyudas = 3;
 
     public void hardMode() {
         difficulty = tModo.DIFICIL;
@@ -152,6 +153,17 @@ public class Engine {
         }
     }
 
+    public boolean usarAyuda(int _i) {
+        if(nAyudas != 0) {
+            System.out.println("El siguiente color es el: " + secuenciaColores[_i] + " Te quedan " + nAyudas + " ayudas.");
+            nAyudas--;
+            return true;
+        } else {
+            System.out.println("No te quedan ayudas");
+            return false;
+        }
+    }
+
     public void start(boolean _stop) {
 
         _stop = false;
@@ -207,26 +219,41 @@ public class Engine {
      */
     public void play(boolean _stop, tModo difficulty, Scanner sc) {
 
-        
+        this.nAyudas = 3;
         boolean acabar = false;
         int ronda = 0;
         int puntos = 0;
         while(acabar == false) {
             puntos = 0;
-            System.out.print("Memoriza esta secuencia: ");
+            System.out.print("Memoriza esta secuencia (x para ayuda): ");
             mostrarSecuencia(ronda);
             pressENTER();
             clearScreen();
             System.out.println("Tu respuesta: ");
-            //este bucle debe de ser un while
+            //este bucle debe de ser un while... no quiero Q_Q
             for(int i = 0; i < ronda + 3; i++) {
                 System.out.print((i+1) + ": ");
-                String answer = sc.next();
-                if(comprobarColor(i, charToColor(answer)) == true) {
-                    puntos += 1;
-                } else {
-                    break;
+                boolean checking = true;
+                while(checking) {
+                    String answer = sc.next();
+                    if(comprobarColor(i, charToColor(answer)) == true) {
+                        puntos += 1;
+                        checking = false;
+                    } else if(answer.toLowerCase().charAt(0) == 'x') {
+                        if(usarAyuda(i)) {
+                            puntos += 1;
+                            checking = false;
+                            pressENTER();
+                        } else {
+                            
+                        }
+                    } 
+                    else {
+                        checking = false;
+                        
+                    }
                 }
+                    
             } 
             clearScreen();
             
