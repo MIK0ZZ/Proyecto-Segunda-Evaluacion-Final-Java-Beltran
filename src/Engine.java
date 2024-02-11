@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
-    private int MAX_COLORES_SEQ = 4;
-    private int MAX_COLORES_SEQ_HARD = 5;
+    private int MAX_COLORES_SEQ = 12;
+    private int MAX_COLORES_SEQ_HARD = 15;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
     private String color = "";
     enum tModo {FACIL, DIFICIL}
@@ -155,8 +155,8 @@ public class Engine {
 
     public boolean usarAyuda(int _i) {
         if(nAyudas != 0) {
-            System.out.println("El siguiente color es el: " + secuenciaColores[_i] + " Te quedan " + nAyudas + " ayudas.");
             nAyudas--;
+            System.out.println("Este color es el: " + secuenciaColores[_i] + " Te quedan " + nAyudas + " ayudas.");
             return true;
         } else {
             System.out.println("No te quedan ayudas");
@@ -230,7 +230,6 @@ public class Engine {
             pressENTER();
             clearScreen();
             System.out.println("Tu respuesta: ");
-            //este bucle debe de ser un while... no quiero Q_Q
             for(int i = 0; i < ronda + 3; i++) {
                 System.out.print((i+1) + ": ");
                 boolean checking = true;
@@ -244,13 +243,9 @@ public class Engine {
                             puntos += 1;
                             checking = false;
                             pressENTER();
-                        } else {
-                            
                         }
-                    } 
-                    else {
+                    } else {
                         checking = false;
-                        
                     }
                 }
                     
