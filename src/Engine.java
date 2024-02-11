@@ -3,13 +3,15 @@ import java.util.Scanner;
 
 public class Engine {
 
-    enum tColores {ROJO, VERDE, AZUL, DORADO}
-    enum tColoresHard {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
-    private final int MAX_COLORES_SEQ = 12;
-    private final int MAX_COLORES_SEQ_HARD = 15;
+    enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
+    private int MAX_COLORES_SEQ = 12;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
-    private tColoresHard[] secuenciaColoresHard = new tColoresHard[MAX_COLORES_SEQ_HARD];
     private String color = "";
+    private boolean hardEnabled = false;
+
+    public void hardMode() {
+        hardEnabled = true;
+    }
 
     public static void clearScreen() {  
         System.out.print("\033[H\033[2J");  
@@ -55,53 +57,56 @@ public class Engine {
      * Genera la secuencia
      */
     public void generarSecuencia() {
-        for(int i = 0; i < secuenciaColores.length; i++) {
-            int n = randomN.nextInt(0,4);
-            switch(n) {
-                case 0:
-                    secuenciaColores[i] = tColores.ROJO;
-                    break;
-                case 1:
-                    secuenciaColores[i] = tColores.VERDE;
-                    break;
-                case 2:
-                    secuenciaColores[i] = tColores.AZUL;
-                    break;
-                case 3:
-                    secuenciaColores[i] = tColores.DORADO;
-                    break;
+        if(this.hardEnabled == false) {
+            for(int i = 0; i <= 4; i++) {
+                int n = randomN.nextInt(0,4);
+                switch(n) {
+                    case 0:
+                        secuenciaColores[i] = tColores.ROJO;
+                        break;
+                    case 1:
+                        secuenciaColores[i] = tColores.VERDE;
+                        break;
+                    case 2:
+                        secuenciaColores[i] = tColores.AZUL;
+                        break;
+                    case 3:
+                        secuenciaColores[i] = tColores.DORADO;
+                        break;
+                }
             }
+        } else {
+            for(int i = 0; i < secuenciaColores.length; i++) {
+                int n = randomN.nextInt(0,7);
+                switch(n) {
+                    case 0:
+                        secuenciaColores[i] = tColores.ROJO;
+                        break;
+                    case 1:
+                        secuenciaColores[i] = tColores.VERDE;
+                        break;
+                    case 2:
+                        secuenciaColores[i] = tColores.AZUL;
+                        break;
+                    case 3:
+                        secuenciaColores[i] = tColores.DORADO;
+                        break;
+                    case 4:
+                        secuenciaColores[i] = tColores.BLANCO;
+                        break;
+                    case 5:
+                        secuenciaColores[i] = tColores.MARRON;
+                        break;
+                    case 6:
+                        secuenciaColores[i] = tColores.NARANJA;
+                        break;
+                    }
+            }
+        
         }
     }
 
-    public void generarSecuenciaHard() {
-        for(int i = 0; i < secuenciaColores.length; i++) {
-            int n = randomN.nextInt(0,7);
-            switch(n) {
-                case 0:
-                    secuenciaColoresHard[i] = tColoresHard.ROJO;
-                    break;
-                case 1:
-                    secuenciaColoresHard[i] = tColoresHard.VERDE;
-                    break;
-                case 2:
-                    secuenciaColoresHard[i] = tColoresHard.AZUL;
-                    break;
-                case 3:
-                    secuenciaColoresHard[i] = tColoresHard.DORADO;
-                    break;
-                case 4:
-                    secuenciaColoresHard[i] = tColoresHard.BLANCO;
-                    break;
-                case 5:
-                    secuenciaColoresHard[i] = tColoresHard.MARRON;
-                    break;
-                case 6:
-                    secuenciaColoresHard[i] = tColoresHard.NARANJA;
-                    break;
-            }
-        }
-    }
+
 
     
     /** 
@@ -116,13 +121,6 @@ public class Engine {
         System.out.print("]");
     }
 
-    public void mostrarSecuenciaHard(int _numero) {
-        System.out.print("[");
-        for(int i = 0; i < _numero + 3; i++) {
-            System.out.print(secuenciaColoresHard[i] + "-");
-        }
-        System.out.print("]");
-    }
 
     /**
      * @param _i
@@ -164,7 +162,8 @@ public class Engine {
                 System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar en modo difícil.");
                 pressENTER();
                 clearScreen();
-                generarSecuenciaHard();
+                hardMode();
+                generarSecuencia();
             } else {
                 _stop = true;
             }
