@@ -4,13 +4,15 @@ import java.util.Scanner;
 public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
-    private int MAX_COLORES_SEQ = 12;
+    private int MAX_COLORES_SEQ = 4;
+    private int MAX_COLORES_SEQ_HARD = 5;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
     private String color = "";
-    private boolean hardEnabled = false;
+    enum tModo {FACIL, DIFICIL}
+    private tModo difficulty = tModo.FACIL;
 
     public void hardMode() {
-        hardEnabled = true;
+        difficulty = tModo.DIFICIL;
     }
 
     public static void clearScreen() {  
@@ -48,6 +50,18 @@ public class Engine {
                 return tColores.DORADO;
             case '4':
                 return tColores.DORADO;
+            case 'b':
+                return tColores.BLANCO;
+            case '5':
+                return tColores.BLANCO;
+            case 'm':
+                return tColores.MARRON;
+            case '6':
+                return tColores.MARRON;
+            case 'n':
+                return tColores.NARANJA;
+            case '7':
+                return tColores.NARANJA;
             default:
                 return null;
         }
@@ -57,8 +71,8 @@ public class Engine {
      * Genera la secuencia
      */
     public void generarSecuencia() {
-        if(this.hardEnabled == false) {
-            for(int i = 0; i <= 4; i++) {
+        if(difficulty == tModo.FACIL) {
+            for(int i = 0; i < secuenciaColores.length; i++) {
                 int n = randomN.nextInt(0,4);
                 switch(n) {
                     case 0:
@@ -76,6 +90,7 @@ public class Engine {
                 }
             }
         } else {
+            secuenciaColores = new tColores[MAX_COLORES_SEQ_HARD];
             for(int i = 0; i < secuenciaColores.length; i++) {
                 int n = randomN.nextInt(0,7);
                 switch(n) {
@@ -141,7 +156,8 @@ public class Engine {
         Scanner sc = new Scanner(System.in);
         Player player = new Player();
 
-        System.out.print("Cual es tu nombre?: ");
+        while (_stop == false) {
+            System.out.print("Cual es tu nombre?: ");
             String name = sc.next();
             player.setName(name);
             clearScreen();
@@ -151,23 +167,29 @@ public class Engine {
             System.out.println("[X] Salir");
             System.out.print("Respuesta: ");
             String opcion = sc.next();
-            sc.close();
+            
 
             if(opcion.charAt(0) == '1') {
                 System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
                 pressENTER();
                 clearScreen();
                 generarSecuencia();
+                play(_stop, difficulty);
             } else if (opcion.charAt(0) == '2') {
                 System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar en modo difícil.");
                 pressENTER();
                 clearScreen();
                 hardMode();
                 generarSecuencia();
+                play(_stop, difficulty);
             } else {
                 _stop = true;
             }
-
+            
+        }
+        sc.close();
+        
+            
 
     }
 
@@ -175,58 +197,66 @@ public class Engine {
      * @param _fallo
      * Ejecucion del juego
      */
-    public void play(boolean _fallo) {
-
-        _fallo = false;
+    public void play(boolean _stop, tModo difficulty) {
 
         Scanner sc = new Scanner(System.in);
-       
-        
-        while(_fallo == false) {
-            boolean acabar = false;
-            int ronda = 0;
-            int puntos = 0;
-
-                while(acabar == false) {
-                    puntos = 0;
-                    System.out.print("Memoriza esta secuencia: ");
-                    mostrarSecuencia(ronda);
-                    pressENTER();
-                    clearScreen();
-                    System.out.println("Tu respuesta: [r/v/a/d]: ");
-                    for(int i = 0; i < ronda + 3; i++) {
-                        System.out.print((i+1) + ": ");
-                        String answer = sc.next();
-                        if(comprobarColor(i, charToColor(answer)) == true) {
-                            puntos += 1;
-                        } else {
-                            break;
-                        }
-                    } 
-                    clearScreen();
-                    if(puntos != (ronda + 3)) {
+        boolean acabar = false;
+        int ronda = 0;
+        int puntos = 0;
+        while(acabar == false) {
+            puntos = 0;
+            System.out.print("Memoriza esta secuencia: ");
+            mostrarSecuencia(ronda);
+            pressENTER();
+            clearScreen();
+            System.out.println("Tu respuesta: ");
+            //este bucle debe de ser un while
+            for(int i = 0; i < ronda + 3; i++) {
+                System.out.print((i+1) + ": ");
+                String answer = sc.next();
+                if(comprobarColor(i, charToColor(answer)) == true) {
+                    puntos += 1;
+                } else {
+                    break;
+                }
+            } 
+            clearScreen();
+            if(puntos != (ronda + 3)) {
+                acabar = true;
+            } else {
+                if(difficulty == tModo.FACIL) {
+                    if(puntos == MAX_COLORES_SEQ) {
                         acabar = true;
                     } else {
-                        if(puntos == MAX_COLORES_SEQ) {
-                            acabar = true;
-                        } else {
-                            ronda += 1;
-                        }
+                        ronda += 1;
+                    }
+                } else if(difficulty == tModo.DIFICIL) {
+                    if(puntos == MAX_COLORES_SEQ_HARD) {
+                        acabar = true;
+                    } else {
+                        ronda += 1;
                     }
                 }
-                if(puntos == MAX_COLORES_SEQ) {
-                    System.out.println("--HAS GANADO--");
-                } else {
-                    System.out.println("--HAS FALLADO--");
-                }
-                pressENTER();
-                    clearScreen();
-
-            
-
-
-            
+                
+            }
         }
+        if(difficulty == tModo.FACIL) {
+            if(puntos == MAX_COLORES_SEQ) {
+                System.out.println("--HAS GANADO--");
+            } else {
+                System.out.println("--HAS FALLADO--");
+            }
+        } else if (difficulty == tModo.DIFICIL) {
+            if(puntos == MAX_COLORES_SEQ_HARD) {
+                System.out.println("--HAS GANADO--");
+            } else {
+                System.out.println("--HAS FALLADO--");
+            }
+        }
+        
+        pressENTER();
+        clearScreen();
+        _stop = true;
         sc.close();
     }
 

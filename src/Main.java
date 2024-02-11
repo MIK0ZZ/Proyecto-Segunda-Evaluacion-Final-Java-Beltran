@@ -22,7 +22,6 @@ public class Main {
 
         Engine engine = new Engine();
 
-        boolean fallo = false;
         boolean stop = false;
 
         clearScreen();
@@ -31,8 +30,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         engine.start(stop);
-
-        engine.play(fallo);
+        
         sc.close();
 
     }
