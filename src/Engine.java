@@ -84,6 +84,7 @@ public class Engine {
         if(difficulty == tModo.FACIL) {
             for(int i = 0; i < secuenciaColores.length; i++) {
                 int n = randomN.nextInt(0,4);
+                //secuenciaColores[i] = tColores.values()[n]; //FUNCIONA PERO SOBREESCRIBE EL ANTERIOR
                 switch(n) {
                     case 0:
                         secuenciaColores[i] = tColores.ROJO;
@@ -103,6 +104,7 @@ public class Engine {
             secuenciaColores = new tColores[MAX_COLORES_SEQ_HARD];
             for(int i = 0; i < secuenciaColores.length; i++) {
                 int n = randomN.nextInt(0,7);
+                //secuenciaColores[i] = tColores.values()[nh];
                 switch(n) {
                     case 0:
                         secuenciaColores[i] = tColores.ROJO;
