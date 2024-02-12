@@ -18,6 +18,9 @@ public class Engine {
     public void hardMode() {
         difficulty = tModo.DIFICIL;
     }
+    public void easyMode() {
+        difficulty = tModo.FACIL;
+    }
 
     /**
      * Limpia la consola
@@ -82,10 +85,11 @@ public class Engine {
      */
     public void generarSecuencia() {
         if(difficulty == tModo.FACIL) {
+            secuenciaColores = new tColores[MAX_COLORES_SEQ];
             for(int i = 0; i < secuenciaColores.length; i++) {
                 int n = randomN.nextInt(0,4);
-                //secuenciaColores[i] = tColores.values()[n]; //FUNCIONA PERO SOBREESCRIBE EL ANTERIOR
-                switch(n) {
+                secuenciaColores[i] = tColores.values()[n]; //FUNCIONA PERO SOBREESCRIBE EL ANTERIOR
+                /*switch(n) {
                     case 0:
                         secuenciaColores[i] = tColores.ROJO;
                         break;
@@ -98,14 +102,14 @@ public class Engine {
                     case 3:
                         secuenciaColores[i] = tColores.DORADO;
                         break;
-                }
+                }*/
             }
-        } else {
+        } else if(difficulty == tModo.DIFICIL) {
             secuenciaColores = new tColores[MAX_COLORES_SEQ_HARD];
             for(int i = 0; i < secuenciaColores.length; i++) {
                 int n = randomN.nextInt(0,7);
-                //secuenciaColores[i] = tColores.values()[nh];
-                switch(n) {
+                secuenciaColores[i] = tColores.values()[n];
+                /*switch(n) {
                     case 0:
                         secuenciaColores[i] = tColores.ROJO;
                         break;
@@ -127,7 +131,7 @@ public class Engine {
                     case 6:
                         secuenciaColores[i] = tColores.NARANJA;
                         break;
-                    }
+                    }*/
             }
         
         }
@@ -212,7 +216,7 @@ public class Engine {
                     System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
                     pressENTER();
                     clearScreen();
-                    generarSecuencia();
+                    easyMode();
                     play(_stop, difficulty, sc);
                     break;
                 case '2':
@@ -220,7 +224,6 @@ public class Engine {
                     pressENTER();
                     clearScreen();
                     hardMode();
-                    generarSecuencia();
                     play(_stop, difficulty, sc);
                     break;
                 default:
@@ -243,7 +246,7 @@ public class Engine {
      * Ejecución del juego
      */
     public void play(boolean _stop, tModo difficulty, Scanner sc) {
-
+        generarSecuencia();
         this.nAyudas = 3;
         boolean acabar = false;
         int ronda = 0;
@@ -258,7 +261,7 @@ public class Engine {
 
             boolean checking = true; //NUEVO
             int i = 0;
-            while(checking) {
+            while(checking && i<secuenciaColores.length) {
                 if(i==ronda+3) {
                     checking = false;
                 } else {
