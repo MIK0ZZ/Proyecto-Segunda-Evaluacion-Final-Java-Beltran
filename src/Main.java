@@ -1,5 +1,3 @@
-
-
 public class Main {
     /**
      * Limpia la consola

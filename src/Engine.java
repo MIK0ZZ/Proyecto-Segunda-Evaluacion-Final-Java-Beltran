@@ -12,16 +12,25 @@ public class Engine {
     private tModo difficulty = tModo.FACIL;
     private int nAyudas = 3;
 
+    /**
+     * Activa el modo dificl.
+     */
     public void hardMode() {
         difficulty = tModo.DIFICIL;
     }
 
-    public static void clearScreen() {  
+    /**
+     * Limpia la consola
+     */
+    public void clearScreen() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
     }  
 
-    public static void pressENTER() {
+    /**
+     * Pausa para el enter
+     */
+    public void pressENTER() {
         System.console().readLine();
     }
 
@@ -69,7 +78,7 @@ public class Engine {
     }
 
     /**
-     * Genera la secuencia
+     * Genera la secuencia tanto en modo dificil como en facil
      */
     public void generarSecuencia() {
         if(difficulty == tModo.FACIL) {
@@ -153,6 +162,12 @@ public class Engine {
         }
     }
 
+    /**
+     * @param _i
+     * @return
+     * 
+     * Comprueba si quedan ayudas
+     */
     public boolean usarAyuda(int _i) {
         if(nAyudas != 0) {
             nAyudas--;
@@ -164,6 +179,11 @@ public class Engine {
         }
     }
 
+    /**
+     * @param _stop
+     * 
+     * Menu de inicio
+     */
     public void start(boolean _stop) {
 
         _stop = false;
@@ -214,8 +234,11 @@ public class Engine {
     }
 
     /**
-     * @param _fallo
-     * Ejecucion del juego
+     * @param _stop
+     * @param difficulty
+     * @param sc
+     * 
+     * Ejecución del juego
      */
     public void play(boolean _stop, tModo difficulty, Scanner sc) {
 
