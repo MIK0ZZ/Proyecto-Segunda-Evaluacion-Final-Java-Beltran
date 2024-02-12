@@ -5,7 +5,6 @@ public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
     private int MAX_COLORES_SEQ = 12;
-    private int MAX_COLORES_SEQ_HARD = 15;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
     private String color = "";
     enum tModo {FACIL, DIFICIL}
@@ -86,21 +85,14 @@ public class Engine {
     /**
      * Genera la secuencia tanto en modo dificil como en facil
      */
-    public void generarSecuencia() { //tiene que entrar el numero maximo del random
-        if(difficulty == tModo.FACIL) {
-            secuenciaColores = new tColores[MAX_COLORES_SEQ];
-            for(int i = 0; i < secuenciaColores.length; i++) {
-                int n = randomN.nextInt(0,4);
-                secuenciaColores[i] = tColores.values()[n]; //FUNCIONA PERO SOBREESCRIBE EL ANTERIOR
-            }
-        } else if(difficulty == tModo.DIFICIL) {
-            secuenciaColores = new tColores[MAX_COLORES_SEQ_HARD];
-            for(int i = 0; i < secuenciaColores.length; i++) {
-                int n = randomN.nextInt(0,7);
-                secuenciaColores[i] = tColores.values()[n];
-            }
+    public void generarSecuencia(int _cantidad) { //tiene que entrar el numero maximo del random
         
+        secuenciaColores = new tColores[MAX_COLORES_SEQ];
+        for(int i = 0; i < secuenciaColores.length; i++) {
+            int n = randomN.nextInt(0,_cantidad);
+            secuenciaColores[i] = tColores.values()[n]; //FUNCIONA PERO SOBREESCRIBE EL ANTERIOR
         }
+        
     }
 
 
@@ -212,8 +204,17 @@ public class Engine {
      * Ejecución del juego
      */
     public void play(boolean _stop, tModo difficulty, Scanner sc) {
-        
-        generarSecuencia();
+
+        int cantidad = 0;
+        switch (difficulty) {
+            case tModo.FACIL:
+                cantidad = 4;
+                break;
+            case tModo.DIFICIL:
+                cantidad = 7;
+                break;
+        }
+        generarSecuencia(cantidad);
         this.nAyudas = 3;
         boolean acabar = false;
         int ronda = 0;
@@ -255,36 +256,18 @@ public class Engine {
             if(puntos != (ronda + 3)) {
                 acabar = true;
             } else {
-                if(difficulty == tModo.FACIL) {
-                    if(puntos == MAX_COLORES_SEQ) {
-                        acabar = true;
-                    } else {
-                        ronda += 1;
-                    }
-                } else if(difficulty == tModo.DIFICIL) {
-                    if(puntos == MAX_COLORES_SEQ_HARD) {
-                        acabar = true;
-                    } else {
-                        ronda += 1;
-                    }
-                }
-                
+                if(puntos == MAX_COLORES_SEQ) {
+                    acabar = true;
+                } else {
+                    ronda += 1;
             }
         }
 
-        switch(difficulty) { //NUEVO
-            case tModo.FACIL:
-                if(puntos == MAX_COLORES_SEQ) {
-                System.out.println("--HAS GANADO--");
-                } else {
-                    System.out.println("--HAS FALLADO--");
-                } break;
-            case tModo.DIFICIL:
-                if(puntos == MAX_COLORES_SEQ_HARD) {
-                    System.out.println("--HAS GANADO--");
-                } else {
-                    System.out.println("--HAS FALLADO--");
-                }
+        if(puntos == MAX_COLORES_SEQ) {
+            System.out.println("--HAS GANADO--");
+            } else {
+                System.out.println("--HAS FALLADO--");
+            }
         } 
         
         pressENTER();
