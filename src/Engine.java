@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
-    private int MAX_COLORES_SEQ = 4;
-    private int MAX_COLORES_SEQ_HARD = 5;
+    private int MAX_COLORES_SEQ = 12;
+    private int MAX_COLORES_SEQ_HARD = 15;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
     private String color = "";
     enum tModo {FACIL, DIFICIL}
@@ -18,6 +18,9 @@ public class Engine {
     public void hardMode() {
         difficulty = tModo.DIFICIL;
     }
+    /**
+     * Actiav el modo facil.
+     */
     public void easyMode() {
         difficulty = tModo.FACIL;
     }
@@ -83,55 +86,18 @@ public class Engine {
     /**
      * Genera la secuencia tanto en modo dificil como en facil
      */
-    public void generarSecuencia() {
+    public void generarSecuencia() { //tiene que entrar el numero maximo del random
         if(difficulty == tModo.FACIL) {
             secuenciaColores = new tColores[MAX_COLORES_SEQ];
             for(int i = 0; i < secuenciaColores.length; i++) {
                 int n = randomN.nextInt(0,4);
                 secuenciaColores[i] = tColores.values()[n]; //FUNCIONA PERO SOBREESCRIBE EL ANTERIOR
-                /*switch(n) {
-                    case 0:
-                        secuenciaColores[i] = tColores.ROJO;
-                        break;
-                    case 1:
-                        secuenciaColores[i] = tColores.VERDE;
-                        break;
-                    case 2:
-                        secuenciaColores[i] = tColores.AZUL;
-                        break;
-                    case 3:
-                        secuenciaColores[i] = tColores.DORADO;
-                        break;
-                }*/
             }
         } else if(difficulty == tModo.DIFICIL) {
             secuenciaColores = new tColores[MAX_COLORES_SEQ_HARD];
             for(int i = 0; i < secuenciaColores.length; i++) {
                 int n = randomN.nextInt(0,7);
                 secuenciaColores[i] = tColores.values()[n];
-                /*switch(n) {
-                    case 0:
-                        secuenciaColores[i] = tColores.ROJO;
-                        break;
-                    case 1:
-                        secuenciaColores[i] = tColores.VERDE;
-                        break;
-                    case 2:
-                        secuenciaColores[i] = tColores.AZUL;
-                        break;
-                    case 3:
-                        secuenciaColores[i] = tColores.DORADO;
-                        break;
-                    case 4:
-                        secuenciaColores[i] = tColores.BLANCO;
-                        break;
-                    case 5:
-                        secuenciaColores[i] = tColores.MARRON;
-                        break;
-                    case 6:
-                        secuenciaColores[i] = tColores.NARANJA;
-                        break;
-                    }*/
             }
         
         }
@@ -246,6 +212,7 @@ public class Engine {
      * Ejecución del juego
      */
     public void play(boolean _stop, tModo difficulty, Scanner sc) {
+        
         generarSecuencia();
         this.nAyudas = 3;
         boolean acabar = false;
@@ -283,27 +250,6 @@ public class Engine {
                 }
             }
 
-           /* for(int i = 0; i < ronda + 3; i++) {    //ANTIGUO
-                System.out.print((i+1) + ": ");
-                boolean checking = true;
-                while(checking) {
-                    String answer = sc.next();
-                    if(comprobarColor(i, charToColor(answer)) == true) {
-                        puntos += 1;
-                        checking = false;
-                    } else if(answer.toLowerCase().charAt(0) == 'x') {
-                        if(usarAyuda(i)) {
-                            puntos += 1;
-                            checking = false;
-                            pressENTER();
-                        }
-                    } else {
-                        checking = false;
-                        
-                    }
-                }
-                    
-            } */
             clearScreen();
             
             if(puntos != (ronda + 3)) {
@@ -340,20 +286,6 @@ public class Engine {
                     System.out.println("--HAS FALLADO--");
                 }
         } 
-
-        /*if(difficulty == tModo.FACIL) {  //ANTIGUO
-            if(puntos == MAX_COLORES_SEQ) {
-                System.out.println("--HAS GANADO--");
-            } else {
-                System.out.println("--HAS FALLADO--");
-            }
-        } else if (difficulty == tModo.DIFICIL) {
-            if(puntos == MAX_COLORES_SEQ_HARD) {
-                System.out.println("--HAS GANADO--");
-            } else {
-                System.out.println("--HAS FALLADO--");
-            }
-        } */
         
         pressENTER();
         clearScreen();

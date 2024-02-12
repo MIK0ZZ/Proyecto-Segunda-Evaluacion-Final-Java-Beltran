@@ -5,7 +5,7 @@ public class Player {
         
     }
     /** 
-     * @param _name
+     * @param _name Nombre de usuario que va a jugar.
      * Escribe el nombre del usuario
      */
     public void setName(String _name) {
