@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
-    private int MAX_COLORES_SEQ = 12;
-    private int MAX_COLORES_SEQ_HARD = 15;
+    private int MAX_COLORES_SEQ = 4;
+    private int MAX_COLORES_SEQ_HARD = 5;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
     private String color = "";
     enum tModo {FACIL, DIFICIL}
@@ -230,7 +230,32 @@ public class Engine {
             pressENTER();
             clearScreen();
             System.out.println("Tu respuesta: ");
-            for(int i = 0; i < ronda + 3; i++) {
+
+            boolean checking = true; //NUEVO
+            int i = 0;
+            while(checking) {
+                if(i==ronda+3) {
+                    checking = false;
+                } else {
+                    System.out.print((i+1) + ": ");
+                    String answer = sc.next();
+                    if(comprobarColor(i, charToColor(answer)) == true) {
+                        puntos += 1;
+                        i++;
+                    } else if(answer.toLowerCase().charAt(0) == 'x') {
+                        if(usarAyuda(i)) {
+                            puntos += 1;
+                            i++;
+                            pressENTER();
+                        }
+                    } else {
+                        checking = false;
+                        
+                    }
+                }
+            }
+
+           /* for(int i = 0; i < ronda + 3; i++) {    //ANTIGUO
                 System.out.print((i+1) + ": ");
                 boolean checking = true;
                 while(checking) {
@@ -246,10 +271,11 @@ public class Engine {
                         }
                     } else {
                         checking = false;
+                        
                     }
                 }
                     
-            } 
+            } */
             clearScreen();
             
             if(puntos != (ronda + 3)) {
@@ -271,7 +297,23 @@ public class Engine {
                 
             }
         }
-        if(difficulty == tModo.FACIL) {
+
+        switch(difficulty) { //NUEVO
+            case tModo.FACIL:
+                if(puntos == MAX_COLORES_SEQ) {
+                System.out.println("--HAS GANADO--");
+                } else {
+                    System.out.println("--HAS FALLADO--");
+                } break;
+            case tModo.DIFICIL:
+                if(puntos == MAX_COLORES_SEQ_HARD) {
+                    System.out.println("--HAS GANADO--");
+                } else {
+                    System.out.println("--HAS FALLADO--");
+                }
+        } 
+
+        /*if(difficulty == tModo.FACIL) {  //ANTIGUO
             if(puntos == MAX_COLORES_SEQ) {
                 System.out.println("--HAS GANADO--");
             } else {
@@ -283,7 +325,7 @@ public class Engine {
             } else {
                 System.out.println("--HAS FALLADO--");
             }
-        }
+        } */
         
         pressENTER();
         clearScreen();
