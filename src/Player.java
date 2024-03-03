@@ -1,9 +1,7 @@
 public class Player {
     private String name;
     private int puntos;
-    public Player() {
-        
-    }
+
     /** 
      * @param _name Nombre de usuario que va a jugar.
      * Escribe el nombre del usuario

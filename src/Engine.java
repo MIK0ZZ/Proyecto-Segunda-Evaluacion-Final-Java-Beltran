@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
-    private int MAX_COLORES_SEQ = 12;
+    private int MAX_COLORES_SEQ = 5;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
     private String color = "";
     enum tModo {FACIL, DIFICIL}
@@ -153,13 +153,14 @@ public class Engine {
 
         Scanner sc = new Scanner(System.in);
         Player player = new Player();
+            
+        System.out.print("Cual es tu nombre?: ");
+        String name = sc.next();
+        player.setName(name);
+        player.setPuntos(0);
 
         while (_stop == false) {
-            String name = "";
             
-            System.out.print("Cual es tu nombre?: ");
-            name = sc.next();
-            player.setName(name);
             clearScreen();
             System.out.println("¿Qué desea hacer?: ");
             System.out.println("[1] Jugar");
@@ -274,10 +275,8 @@ public class Engine {
             if(puntos == MAX_COLORES_SEQ) {
                 System.out.println("--HAS GANADO--");
                 score+=40; //
-                
             } else {
                 System.out.println("--HAS FALLADO--");
-                
             } 
         } 
         pressENTER();
