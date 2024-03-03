@@ -18,7 +18,7 @@ public class Engine {
         difficulty = tModo.DIFICIL;
     }
     /**
-     * Actiav el modo facil.
+     * Activa el modo facil.
      */
     public void easyMode() {
         difficulty = tModo.FACIL;
@@ -115,7 +115,6 @@ public class Engine {
      * @param _i
      * @param _color
      * @return
-     * 
      * Comprueba cada color en la secuencia
      */
     public boolean comprobarColor(int _i, tColores _color) {
@@ -260,11 +259,11 @@ public class Engine {
                     acabar = true;
                 } else {
                     ronda += 1;
+                }
             }
-        }
-
-        if(puntos == MAX_COLORES_SEQ) {
-            System.out.println("--HAS GANADO--");
+            //FALLA ALGO
+            if(puntos == MAX_COLORES_SEQ) {
+                System.out.println("--HAS GANADO--");
             } else {
                 System.out.println("--HAS FALLADO--");
             }
