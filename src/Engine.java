@@ -164,6 +164,8 @@ public class Engine {
             System.out.println("¿Qué desea hacer?: ");
             System.out.println("[1] Jugar");
             System.out.println("[2] Jugar en dificil");
+            System.out.println("[3] Ver 10 mejores jugadores *");
+            System.out.println("[4] Ver tryhards");
             System.out.println("[X] Salir");
             System.out.print("Respuesta: ");
             String opcion = sc.next();
@@ -202,8 +204,10 @@ public class Engine {
      * 
      * Ejecución del juego
      */
-    public void play(boolean _stop, tModo difficulty, Scanner sc) {
 
+     //ACTUALMENTE EN CONSTRUCCION: DEVOLVER PUNTUACION
+    public int play(boolean _stop, tModo difficulty, Scanner sc) {
+        int score = 0;
         int cantidad = 0;
         switch (difficulty) {
             case tModo.FACIL:
@@ -212,6 +216,8 @@ public class Engine {
             case tModo.DIFICIL:
                 cantidad = 7;
                 break;
+            default:
+                return score;
         }
         generarSecuencia(cantidad);
         this.nAyudas = 3;
@@ -264,13 +270,15 @@ public class Engine {
             //FALLA ALGO
             if(puntos == MAX_COLORES_SEQ) {
                 System.out.println("--HAS GANADO--");
+                
             } else {
                 System.out.println("--HAS FALLADO--");
-            }
+                
+            } 
         } 
-        
         pressENTER();
         clearScreen();
+        return score;
         
         
     } 
