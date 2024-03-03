@@ -42,9 +42,8 @@ public class Engine {
     Random randomN = new Random();
 
     /** 
-     * @param _color
-     * @return tColores
-     * Transforma el caracter de entrada en un color
+     * @param _color Transforma el caracter de entrada en un color
+     * @return tColores 
      */
     public tColores charToColor(String _color) {
         this.color = _color.toLowerCase();
@@ -99,8 +98,7 @@ public class Engine {
 
     
     /** 
-     * @param _numero
-     * Muestra la secuencia de la ronda
+     * @param _numero Muestra la secuencia de la ronda
      */
     public void mostrarSecuencia(int _numero) {
         System.out.print("[");
@@ -113,9 +111,8 @@ public class Engine {
 
     /**
      * @param _i
-     * @param _color
+     * @param _color Comprueba cada color en la secuencia
      * @return
-     * Comprueba cada color en la secuencia
      */
     public boolean comprobarColor(int _i, tColores _color) {
         if(_color == secuenciaColores[_i]) {
@@ -126,10 +123,8 @@ public class Engine {
     }
 
     /**
-     * @param _i
+     * @param _i  Comprueba si quedan ayudas
      * @return
-     * 
-     * Comprueba si quedan ayudas
      */
     public boolean usarAyuda(int _i) {
         if(nAyudas != 0) {
@@ -143,9 +138,7 @@ public class Engine {
     }
 
     /**
-     * @param _stop
-     * 
-     * Menu de inicio
+     * @param _stop Menu de inicio
      */
     public void start(boolean _stop) {
 
