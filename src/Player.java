@@ -1,6 +1,6 @@
 public class Player {
     private String name;
-
+    private int puntos;
     public Player() {
         
     }
@@ -14,6 +14,14 @@ public class Player {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setPuntos(int _puntos) {
+        this.puntos = _puntos;
+    }
+
+    public int getPuntos() {
+        return this.puntos;
     }
 
 

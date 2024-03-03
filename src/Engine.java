@@ -176,14 +176,14 @@ public class Engine {
                     pressENTER();
                     clearScreen();
                     easyMode();
-                    play(_stop, difficulty, sc);
+                    player.setPuntos(play(_stop, difficulty, sc));
                     break;
                 case '2':
                     System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar en modo difícil.");
                     pressENTER();
                     clearScreen();
                     hardMode();
-                    play(_stop, difficulty, sc);
+                    player.setPuntos(play(_stop, difficulty, sc));
                     break;
                 default:
                     _stop = true;
@@ -242,10 +242,12 @@ public class Engine {
                     String answer = sc.next();
                     if(comprobarColor(i, charToColor(answer)) == true) {
                         puntos += 1;
+                        score+=2; //
                         i++;
                     } else if(answer.toLowerCase().charAt(0) == 'x') {
                         if(usarAyuda(i)) {
                             puntos += 1;
+                            score-=8; //
                             i++;
                             pressENTER();
                         }
@@ -265,11 +267,13 @@ public class Engine {
                     acabar = true;
                 } else {
                     ronda += 1;
+                    score+=5; //
                 }
             }
             //FALLA ALGO
             if(puntos == MAX_COLORES_SEQ) {
                 System.out.println("--HAS GANADO--");
+                score+=40; //
                 
             } else {
                 System.out.println("--HAS FALLADO--");
