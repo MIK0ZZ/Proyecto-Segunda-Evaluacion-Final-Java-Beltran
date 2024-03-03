@@ -146,6 +146,7 @@ public class Engine {
 
         Scanner sc = new Scanner(System.in);
         Player player = new Player();
+        Record rk = new Record();
             
         System.out.print("Cual es tu nombre?: ");
         String name = sc.next();
@@ -181,6 +182,13 @@ public class Engine {
                     clearScreen();
                     hardMode();
                     player.setPuntos(play(_stop, difficulty, sc));
+                    break;
+                case '3':
+                    rk.showRanking();
+                    pressENTER();
+                    clearScreen();
+                    break;
+                case '4':
                     break;
                 default:
                     _stop = true;
