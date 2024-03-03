@@ -161,7 +161,10 @@ public class Engine {
 
         while (_stop == false) {
             
+            
             clearScreen();
+            System.out.println("Puntos actuales: " + player.getPuntos());
+            System.out.println("----------------------");
             System.out.println("¿Qué desea hacer?: ");
             System.out.println("[1] Jugar");
             System.out.println("[2] Jugar en dificil");
@@ -262,22 +265,18 @@ public class Engine {
             clearScreen();
             
             if(puntos != (ronda + 3)) {
+                System.out.println("--HAS FALLADO--");
                 acabar = true;
             } else {
                 if(puntos == MAX_COLORES_SEQ) {
+                    System.out.println("--HAS GANADO--");
+                    score+=40; //
                     acabar = true;
                 } else {
                     ronda += 1;
                     score+=5; //
                 }
             }
-            //FALLA ALGO
-            if(puntos == MAX_COLORES_SEQ) {
-                System.out.println("--HAS GANADO--");
-                score+=40; //
-            } else {
-                System.out.println("--HAS FALLADO--");
-            } 
         } 
         pressENTER();
         clearScreen();
