@@ -11,20 +11,30 @@ public class Player {
 
     /** 
      * @param _name Nombre de usuario que va a jugar.
-     * Escribe el nombre del usuario
      */
     public void setName(String _name) {
         this.name = _name;
     }
 
+    /**
+     * Devuelve el nombre
+     * @return
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @param _puntos Escribe los puntos
+     */
     public void setPuntos(int _puntos) {
         this.puntos = _puntos;
     }
 
+    /**
+     * Devuelve los puntos
+     * @return
+     */
     public int getPuntos() {
         return this.puntos;
     }

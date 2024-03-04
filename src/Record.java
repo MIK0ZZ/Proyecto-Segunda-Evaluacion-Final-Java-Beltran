@@ -6,10 +6,18 @@ public class Record {
     
     
 
+    
+    /** 
+     * @param _player añade un jugador al ranking
+     */
     public void addPlayerRanking(Player _player) {
         this.top10.add(_player);
     }
 
+    /**
+     * Muestra el raking ordenado
+     * Complejidad de 0(n^2)
+     */
     public void showRanking() {
         System.out.println("----TOP10----");
         for (int i = 0; i < top10.size(); i++) {
@@ -28,6 +36,10 @@ public class Record {
         System.out.println("-------------");
     }
 
+    /**
+     * Muestra los mejores jugadores
+     * Complejidad de 0(n)
+     */
     public void showBestPlayer() {
         System.out.println("---SinMujeres----");
         for(int i = 0; i<top10.size(); i++) {

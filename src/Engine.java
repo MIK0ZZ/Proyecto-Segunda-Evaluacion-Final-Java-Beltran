@@ -83,6 +83,7 @@ public class Engine {
 
     /**
      * Genera la secuencia tanto en modo dificil como en facil
+     * Complejidad de 0(n)
      */
     public void generarSecuencia(int _cantidad) { //tiene que entrar el numero maximo del random
         
@@ -169,7 +170,7 @@ public class Engine {
             System.out.println("¿Qué desea hacer?: ");
             System.out.println("[1] Jugar");
             System.out.println("[2] Jugar en dificil");
-            System.out.println("[3] Ver 10 mejores jugadores *");
+            System.out.println("[3] Ver 10 mejores jugadores");
             System.out.println("[4] Ver tryhards");
             System.out.println("[X] Salir");
             System.out.print("Respuesta: ");
@@ -215,11 +216,11 @@ public class Engine {
     }
 
     /**
-     * @param _stop
+     * Ejecución del juego
+     * @param _stop 
      * @param difficulty
      * @param sc
-     * 
-     * Ejecución del juego
+     * Complejidad de 0(n)
      */
 
      //ACTUALMENTE EN CONSTRUCCION: DEVOLVER PUNTUACION
