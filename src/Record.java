@@ -30,6 +30,12 @@ public class Record {
 
     public void showBestPlayer() {
         System.out.println("---SinMujeres----");
-        
+        for(int i = 0; i<top10.size(); i++) {
+            if(top10.get(i).getPuntos() == 470) {
+                System.out.println(i+1 + ". " +top10.get(i).getName() + " = " + top10.get(i).getPuntos());
+            }
+            
+        }
+        System.out.println("-----------------");
     }
 }

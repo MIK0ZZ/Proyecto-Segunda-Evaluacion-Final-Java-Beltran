@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Engine {
 
     enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
-    private int MAX_COLORES_SEQ = 5;
+    private int MAX_COLORES_SEQ = 12;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
     private String color = "";
     enum tModo {FACIL, DIFICIL}
@@ -146,8 +146,8 @@ public class Engine {
 
         Scanner sc = new Scanner(System.in);
         Player player = new Player("default",0);
-        Player uno = new Player("Mario", 74);
-        Player dos = new Player("Maria", 40);
+        Player uno = new Player("Tete", 470);
+        Player dos = new Player("Maria", 200);
         Player tres = new Player("Pedro", 12);
         Record rk = new Record();
         rk.addPlayerRanking(uno);
@@ -191,11 +191,16 @@ public class Engine {
                     player.setPuntos(play(_stop, difficulty, sc));
                     break;
                 case '3':
+                    clearScreen();
                     rk.showRanking();
                     pressENTER();
                     clearScreen();
                     break;
                 case '4':
+                    clearScreen();
+                    rk.showBestPlayer();
+                    pressENTER();
+                    clearScreen();
                     break;
                 default:
                     _stop = true;
