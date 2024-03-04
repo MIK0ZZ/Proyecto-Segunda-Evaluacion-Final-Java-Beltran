@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Record {
-    //ngl no se que va aquí
-    ArrayList<Player> top10 = new ArrayList<Player>(10);
+    private final int MAX_JUGADORES = 10;
+    ArrayList<Player> top10 = new ArrayList<Player>(MAX_JUGADORES);
     
     
 
