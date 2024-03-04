@@ -145,8 +145,15 @@ public class Engine {
         _stop = false;
 
         Scanner sc = new Scanner(System.in);
-        Player player = new Player();
+        Player player = new Player("default",0);
+        Player uno = new Player("Mario", 74);
+        Player dos = new Player("Maria", 40);
+        Player tres = new Player("Pedro", 12);
         Record rk = new Record();
+        rk.addPlayerRanking(uno);
+        rk.addPlayerRanking(dos);
+        rk.addPlayerRanking(tres);
+        rk.addPlayerRanking(player);
             
         System.out.print("Cual es tu nombre?: ");
         String name = sc.next();
@@ -281,7 +288,10 @@ public class Engine {
         } 
         pressENTER();
         clearScreen();
-        return score;
+        if(difficulty == tModo.DIFICIL) {
+            return score*2;
+        } else {return score;}
+        
         
         
     } 
