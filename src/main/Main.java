@@ -1,3 +1,4 @@
+package main;
 public class Main {
     /**
      * Limpia la consola

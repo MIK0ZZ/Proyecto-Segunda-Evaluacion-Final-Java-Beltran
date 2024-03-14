@@ -1,11 +1,10 @@
+package main;
 import java.util.ArrayList;
 
 public class Record {
     private final int MAX_JUGADORES = 10;
     ArrayList<Player> top10 = new ArrayList<Player>(MAX_JUGADORES);
     
-    
-
     
     /** 
      * @param _player añade un jugador al ranking
@@ -14,12 +13,23 @@ public class Record {
         this.top10.add(_player);
     }
 
+
+    //Dividir el metodo burbuja en un metodo aparte
     /**
      * Muestra el raking ordenado
      * Complejidad de 0(n^2)
      */
     public void showRanking() {
         System.out.println("----TOP10----");
+        
+
+        for(int i = 0; i<top10.size(); i++) {
+            System.out.println(i+1 + ". " +top10.get(i).getName() + " = " + top10.get(i).getPuntos());
+        }
+        System.out.println("-------------");
+    }
+
+    public void ordenarRanking() {
         for (int i = 0; i < top10.size(); i++) {
             for (int j = 0; j < top10.size()-i-1; j++) {
                 if (top10.get(j).getPuntos() < top10.get(j+1).getPuntos()) {
@@ -29,13 +39,10 @@ public class Record {
                 }
             }
         }
-
-        for(int i = 0; i<top10.size(); i++) {
-            System.out.println(i+1 + ". " +top10.get(i).getName() + " = " + top10.get(i).getPuntos());
-        }
-        System.out.println("-------------");
     }
 
+
+    //El mejor jugador no tiene por que haber obtenido 470, es necesario ordenar el array y mostrar solo el primero
     /**
      * Muestra los mejores jugadores
      * Complejidad de 0(n)
