@@ -201,6 +201,7 @@ public class Engine {
                     clearScreen();
                     break;
                 default:
+                    rk.escribirRanking(player);
                     _stop = true;
             }
             

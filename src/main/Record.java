@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import files.CustomReadFile;
+import files.CustomWriteFile;
 
 public class Record {
     private final int MAX_JUGADORES = 10;
@@ -29,6 +30,23 @@ public class Record {
          
     }
 
+    /**
+     * @param _player Recibe un player y lo escribe en el ranking.
+     */
+    public void escribirRanking(Player _player) {
+        try {
+            @SuppressWarnings("resource")
+            CustomWriteFile cwf = new CustomWriteFile(file, true);
+            String chain = _player.getPuntos() + " " + _player.getName();
+            cwf.writeJugadores(chain);
+            cwf.closeWriteFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("El archivo no se encontró.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /** 
      * @param _player añade un jugador al ranking

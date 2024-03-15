@@ -7,7 +7,7 @@ import java.io.IOException;
 public class CustomWriteFile extends FileWriter implements ICustomWriteFile {
 
     public CustomWriteFile(File file, boolean append) throws IOException {
-        super(file, true);
+        super(file, append);
     }
 
     /**
