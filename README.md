@@ -7,7 +7,7 @@
 Este es mi proyecto de la segunda evaluación de la asignatura de java construido con mi sudor y lágrimas.
 
 ## Documentación
-El javadoc se encuentra en la carpeta "javadoc"
+El javadoc se encuentra en la carpeta "javadoc".
 
 ## Dependencias
 - JDK21
