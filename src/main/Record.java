@@ -74,7 +74,7 @@ public class Record {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("-------------");
         }
-        
+
     }
 
     /**
@@ -93,19 +93,23 @@ public class Record {
         }
     }
 
-
     /**
      * Muestra los mejores jugadores
      * Complejidad de 0(n)
      */
     public void showBestPlayer() {
         System.out.println("---SinMujeres----");
-        for (int i = 0; i < top10.size(); i++) {
-            if (top10.get(i).getPuntos() == top10.get(0).getPuntos()) {
-                System.out.println(i + 1 + ". " + top10.get(i).getName() + " = " + top10.get(i).getPuntos());
-            }
+        try {
+            for (int i = 0; i < top10.size(); i++) {
+                if (top10.get(i).getPuntos() == top10.get(0).getPuntos()) {
+                    System.out.println(i + 1 + ". " + top10.get(i).getName() + " = " + top10.get(i).getPuntos());
+                }
 
+            }
+            System.out.println("-----------------");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("-----------------");
         }
-        System.out.println("-----------------");
+
     }
 }
