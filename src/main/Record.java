@@ -33,11 +33,15 @@ public class Record {
     /**
      * @param _player Recibe un player y lo escribe en el ranking.
      */
-    public void escribirRanking(Player _player) {
+    public void escribirRanking() {
         try {
             @SuppressWarnings("resource")
-            CustomWriteFile cwf = new CustomWriteFile(file, true);
-            String chain = _player.getPuntos() + " " + _player.getName();
+            CustomWriteFile cwf = new CustomWriteFile(file);
+            String chain = "";
+            for(int i = 0; i < this.top10.size(); i++) {
+                chain = chain + top10.get(i).getPuntos() + " " + top10.get(i).getName() +"\n";
+            }
+            
             cwf.writeJugadores(chain);
             cwf.closeWriteFile();
         } catch (FileNotFoundException e) {

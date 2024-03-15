@@ -1,3 +1,4 @@
 470 Tete
 200 María
-12 pedro
+12 Pedro
+83 Miko
