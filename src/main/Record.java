@@ -66,10 +66,15 @@ public class Record {
     public void showRanking() {
         System.out.println("----TOP10----");
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(i + 1 + ". " + top10.get(i).getName() + " = " + top10.get(i).getPuntos());
+        try {
+            for (int i = 0; i < 10; i++) {
+                System.out.println(i + 1 + ". " + top10.get(i).getName() + " = " + top10.get(i).getPuntos());
+            }
+            System.out.println("-------------");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("-------------");
         }
-        System.out.println("-------------");
+        
     }
 
     /**

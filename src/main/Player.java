@@ -4,6 +4,11 @@ public class Player {
     private String name;
     private int puntos;
 
+    /**
+     * Recibe el nombre y la puntuación.
+     * @param _name
+     * @param _score
+     */
     public Player(String _name, int _score) {
         this.name = _name;
         this.puntos = _score;
