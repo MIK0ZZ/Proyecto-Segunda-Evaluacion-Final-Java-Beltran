@@ -1,4 +1,5 @@
 package main;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,8 +12,7 @@ public class Record {
     private final int MAX_JUGADORES = 10;
     ArrayList<Player> top10 = new ArrayList<Player>(MAX_JUGADORES);
     File file = new File("./src/data/top.txt");
-    
-    
+
     /**
      * Carga el ranking.
      */
@@ -27,7 +27,7 @@ public class Record {
         } catch (IOException e) {
             e.printStackTrace();
         }
-         
+
     }
 
     /**
@@ -38,10 +38,10 @@ public class Record {
             @SuppressWarnings("resource")
             CustomWriteFile cwf = new CustomWriteFile(file);
             String chain = "";
-            for(int i = 0; i < this.top10.size(); i++) {
-                chain = chain + top10.get(i).getPuntos() + " " + top10.get(i).getName() +"\n";
+            for (int i = 0; i < this.top10.size(); i++) {
+                chain = chain + top10.get(i).getPuntos() + " " + top10.get(i).getName() + "\n";
             }
-            
+
             cwf.writeJugadores(chain);
             cwf.closeWriteFile();
         } catch (FileNotFoundException e) {
@@ -52,54 +52,54 @@ public class Record {
         }
     }
 
-    /** 
+    /**
      * @param _player añade un jugador al ranking
      */
     public void addPlayerRanking(Player _player) {
         this.top10.add(_player);
     }
 
-
-    //Dividir el metodo burbuja en un metodo aparte
     /**
      * Muestra el raking ordenado
-     * Complejidad de 0(n^2)
+     * Complejidad de 0(n)
      */
     public void showRanking() {
         System.out.println("----TOP10----");
-        
 
-        for(int i = 0; i<10; i++) {
-            System.out.println(i+1 + ". " +top10.get(i).getName() + " = " + top10.get(i).getPuntos());
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i + 1 + ". " + top10.get(i).getName() + " = " + top10.get(i).getPuntos());
         }
         System.out.println("-------------");
     }
 
+    /**
+     * Ordena el ranking
+     * Complejidad de 0(n^2)
+     */
     public void ordenarRanking() {
         for (int i = 0; i < top10.size(); i++) {
-            for (int j = 0; j < top10.size()-i-1; j++) {
-                if (top10.get(j).getPuntos() < top10.get(j+1).getPuntos()) {
+            for (int j = 0; j < top10.size() - i - 1; j++) {
+                if (top10.get(j).getPuntos() < top10.get(j + 1).getPuntos()) {
                     Player temp = top10.get(j);
-                    top10.set(j, top10.get(j+1));
-                    top10.set(j+1, temp);
+                    top10.set(j, top10.get(j + 1));
+                    top10.set(j + 1, temp);
                 }
             }
         }
     }
 
 
-    //El mejor jugador no tiene por que haber obtenido 470, es necesario ordenar el array y mostrar solo el primero
     /**
      * Muestra los mejores jugadores
      * Complejidad de 0(n)
      */
     public void showBestPlayer() {
         System.out.println("---SinMujeres----");
-        for(int i = 0; i<top10.size(); i++) {
-            if(top10.get(i).getPuntos() == top10.get(0).getPuntos()) {
-                System.out.println(i+1 + ". " +top10.get(i).getName() + " = " + top10.get(i).getPuntos());
+        for (int i = 0; i < top10.size(); i++) {
+            if (top10.get(i).getPuntos() == top10.get(0).getPuntos()) {
+                System.out.println(i + 1 + ". " + top10.get(i).getName() + " = " + top10.get(i).getPuntos());
             }
-            
+
         }
         System.out.println("-----------------");
     }

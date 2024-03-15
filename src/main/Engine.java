@@ -1,14 +1,22 @@
 package main;
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class Engine {
 
-    enum tColores {ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA}
+    enum tColores {
+        ROJO, VERDE, AZUL, DORADO, BLANCO, MARRON, NARANJA
+    }
+
     private int MAX_COLORES_SEQ = 12;
     private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
     private String color = "";
-    enum tModo {FACIL, DIFICIL}
+
+    enum tModo {
+        FACIL, DIFICIL
+    }
+
     private tModo difficulty = tModo.FACIL;
     private int nAyudas = 3;
 
@@ -18,6 +26,7 @@ public class Engine {
     public void hardMode() {
         difficulty = tModo.DIFICIL;
     }
+
     /**
      * Activa el modo facil.
      */
@@ -28,10 +37,10 @@ public class Engine {
     /**
      * Limpia la consola
      */
-    public void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
-    }  
+    public void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
     /**
      * Pausa para el enter
@@ -42,13 +51,13 @@ public class Engine {
 
     Random randomN = new Random();
 
-    /** 
+    /**
      * @param _color Transforma el caracter de entrada en un color
-     * @return tColores 
+     * @return tColores
      */
     public tColores charToColor(String _color) {
         this.color = _color.toLowerCase();
-        switch(color.charAt(0)) {
+        switch (color.charAt(0)) {
             case 'r':
                 return tColores.ROJO;
             case '1':
@@ -86,30 +95,26 @@ public class Engine {
      * Genera la secuencia tanto en modo dificil como en facil
      * Complejidad de 0(n)
      */
-    public void generarSecuencia(int _cantidad) { //tiene que entrar el numero maximo del random
-        
+    public void generarSecuencia(int _cantidad) { // tiene que entrar el numero maximo del random
+
         secuenciaColores = new tColores[MAX_COLORES_SEQ];
-        for(int i = 0; i < secuenciaColores.length; i++) {
-            int n = randomN.nextInt(0,_cantidad);
-            secuenciaColores[i] = tColores.values()[n]; //FUNCIONA PERO SOBREESCRIBE EL ANTERIOR
+        for (int i = 0; i < secuenciaColores.length; i++) {
+            int n = randomN.nextInt(0, _cantidad);
+            secuenciaColores[i] = tColores.values()[n]; // FUNCIONA PERO SOBREESCRIBE EL ANTERIOR
         }
-        
+
     }
 
-
-
-    
-    /** 
+    /**
      * @param _numero Muestra la secuencia de la ronda
      */
     public void mostrarSecuencia(int _numero) {
         System.out.print("[");
-        for(int i = 0; i < _numero + 3; i++) {
+        for (int i = 0; i < _numero + 3; i++) {
             System.out.print(secuenciaColores[i] + "-");
         }
         System.out.print("]");
     }
-
 
     /**
      * @param _i
@@ -117,7 +122,7 @@ public class Engine {
      * @return
      */
     public boolean comprobarColor(int _i, tColores _color) {
-        if(_color == secuenciaColores[_i]) {
+        if (_color == secuenciaColores[_i]) {
             return true;
         } else {
             return false;
@@ -125,11 +130,11 @@ public class Engine {
     }
 
     /**
-     * @param _i  Comprueba si quedan ayudas
+     * @param _i Comprueba si quedan ayudas
      * @return
      */
     public boolean usarAyuda(int _i) {
-        if(nAyudas != 0) {
+        if (nAyudas != 0) {
             nAyudas--;
             System.out.println("Este color es el: " + secuenciaColores[_i] + " Te quedan " + nAyudas + " ayudas.");
             return true;
@@ -147,17 +152,16 @@ public class Engine {
         _stop = false;
 
         Scanner sc = new Scanner(System.in);
-        Player player = new Player("default",0);
+        Player player = new Player("default", 0);
         Record rk = new Record();
-        
-            
+
         System.out.print("Cual es tu nombre?: ");
         String name = sc.next();
         player.setName(name);
         player.setPuntos(0);
 
         while (_stop == false) {
-            
+
             rk.cargarRanking();
             rk.addPlayerRanking(player);
             clearScreen();
@@ -172,7 +176,7 @@ public class Engine {
             System.out.print("Respuesta: ");
             String opcion = sc.next();
 
-            switch(opcion.charAt(0)) {
+            switch (opcion.charAt(0)) {
                 case '1':
                     System.out.println("Hola " + player.getName() + " pulsa ENTER para jugar.");
                     pressENTER();
@@ -202,27 +206,26 @@ public class Engine {
                     clearScreen();
                     break;
                 default:
+                    rk.ordenarRanking();
                     rk.escribirRanking();
                     _stop = true;
             }
-            
-            
+
         }
         sc.close();
-        
-            
 
     }
 
     /**
      * Ejecución del juego
-     * @param _stop 
+     * 
+     * @param _stop
      * @param difficulty
      * @param sc
-     * Complejidad de 0(n)
+     *                   Complejidad de 0(n)
      */
 
-     //ACTUALMENTE EN CONSTRUCCION: DEVOLVER PUNTUACION
+    // ACTUALMENTE EN CONSTRUCCION: DEVOLVER PUNTUACION
     public int play(boolean _stop, tModo difficulty, Scanner sc) {
         int score = 0;
         int cantidad = 0;
@@ -241,7 +244,7 @@ public class Engine {
         boolean acabar = false;
         int ronda = 0;
         int puntos = 0;
-        while(acabar == false) {
+        while (acabar == false) {
             puntos = 0;
             System.out.print("Memoriza esta secuencia (x para ayuda): ");
             mostrarSecuencia(ronda);
@@ -249,61 +252,61 @@ public class Engine {
             clearScreen();
             System.out.println("Tu respuesta: ");
 
-            boolean checking = true; //NUEVO
+            boolean checking = true; // NUEVO
             int i = 0;
-            while(checking && i<secuenciaColores.length) {
-                if(i==ronda+3) {
+            while (checking && i < secuenciaColores.length) {
+                if (i == ronda + 3) {
                     checking = false;
                 } else {
-                    System.out.print((i+1) + ": ");
+                    System.out.print((i + 1) + ": ");
                     String answer = sc.next();
-                    if(comprobarColor(i, charToColor(answer)) == true) {
+                    if (comprobarColor(i, charToColor(answer)) == true) {
                         puntos += 1;
-                        score+=2; //
+                        score += 2; //
                         i++;
-                    } else if(answer.toLowerCase().charAt(0) == 'x') {
-                        if(usarAyuda(i)) {
+                    } else if (answer.toLowerCase().charAt(0) == 'x') {
+                        if (usarAyuda(i)) {
                             puntos += 1;
-                            //Revisar esto
+                            // Revisar esto
                             int x = 8;
-                            while(score-x < 0) {
+                            while (score - x < 0) {
                                 x--;
                             }
-                            score-=x; //
+                            score -= x; //
                             i++;
                             pressENTER();
                         }
                     } else {
                         checking = false;
-                        
+
                     }
                 }
             }
 
             clearScreen();
-            
-            if(puntos != (ronda + 3)) {
+
+            if (puntos != (ronda + 3)) {
                 System.out.println("--HAS FALLADO--");
                 acabar = true;
             } else {
-                if(puntos == MAX_COLORES_SEQ) {
+                if (puntos == MAX_COLORES_SEQ) {
                     System.out.println("--HAS GANADO--");
-                    score+=40; //
+                    score += 40; //
                     acabar = true;
                 } else {
                     ronda += 1;
-                    score+=5; //
+                    score += 5; //
                 }
             }
-        } 
+        }
         pressENTER();
         clearScreen();
-        if(difficulty == tModo.DIFICIL) {
-            return score*2;
-        } else {return score;}
-        
-        
-        
-    } 
+        if (difficulty == tModo.DIFICIL) {
+            return score * 2;
+        } else {
+            return score;
+        }
+
+    }
 
 }

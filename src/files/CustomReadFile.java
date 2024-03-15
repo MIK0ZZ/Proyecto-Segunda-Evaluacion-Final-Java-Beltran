@@ -10,13 +10,12 @@ import java.util.Scanner;
 import main.Player;
 
 public class CustomReadFile extends FileReader implements ICustomReadFile {
-    
 
     public CustomReadFile(File file) throws FileNotFoundException {
         super(file);
     }
 
-    ArrayList <Player> leerJugadores = new ArrayList<>();
+    ArrayList<Player> leerJugadores = new ArrayList<>();
     Scanner lector = new Scanner(this);
 
     /**

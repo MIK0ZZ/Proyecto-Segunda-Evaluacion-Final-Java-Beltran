@@ -1,16 +1,15 @@
 package main;
+
 public class Player {
     private String name;
     private int puntos;
 
-    public Player (String _name, int _score) {
+    public Player(String _name, int _score) {
         this.name = _name;
         this.puntos = _score;
     }
 
-
-
-    /** 
+    /**
      * @param _name Nombre de usuario que va a jugar.
      */
     public void setName(String _name) {
@@ -19,6 +18,7 @@ public class Player {
 
     /**
      * Devuelve el nombre
+     * 
      * @return
      */
     public String getName() {
@@ -34,13 +34,11 @@ public class Player {
 
     /**
      * Devuelve los puntos
+     * 
      * @return
      */
     public int getPuntos() {
         return this.puntos;
     }
-
-
-
 
 }

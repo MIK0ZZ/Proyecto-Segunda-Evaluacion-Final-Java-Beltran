@@ -33,7 +33,5 @@ public class CustomWriteFile extends FileWriter implements ICustomWriteFile {
             e.printStackTrace();
         }
     }
-    
 
-    
 }
