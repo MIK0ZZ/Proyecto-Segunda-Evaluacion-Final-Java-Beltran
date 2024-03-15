@@ -2,7 +2,6 @@ package files;
 
 import java.util.ArrayList;
 
-import main.Player;
 
 public interface ICustomReadFile {
     @SuppressWarnings("rawtypes")

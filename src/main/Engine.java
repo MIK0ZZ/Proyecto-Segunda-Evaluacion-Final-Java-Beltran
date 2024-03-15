@@ -262,7 +262,12 @@ public class Engine {
                     } else if(answer.toLowerCase().charAt(0) == 'x') {
                         if(usarAyuda(i)) {
                             puntos += 1;
-                            score-=8; //
+                            //Revisar esto
+                            int x = 8;
+                            while(score-x < 0) {
+                                x--;
+                            }
+                            score-=x; //
                             i++;
                             pressENTER();
                         }

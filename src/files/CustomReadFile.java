@@ -14,7 +14,6 @@ public class CustomReadFile extends FileReader implements ICustomReadFile {
 
     public CustomReadFile(File file) throws FileNotFoundException {
         super(file);
-        
     }
 
     ArrayList <Player> leerJugadores = new ArrayList<>();
@@ -23,6 +22,7 @@ public class CustomReadFile extends FileReader implements ICustomReadFile {
     /**
      * Lee el fichero, divide en 2 la cadena y lo añade a un jugador.
      */
+    @Override
     @SuppressWarnings("rawtypes")
     public ArrayList leerJugadores() {
         while (lector.hasNextLine()) {
@@ -41,6 +41,7 @@ public class CustomReadFile extends FileReader implements ICustomReadFile {
     /**
      * Cierra el fichero.
      */
+    @Override
     public void closeReadFile() {
         lector.close();
         try {
