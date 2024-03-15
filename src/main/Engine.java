@@ -196,6 +196,7 @@ public class Engine {
                     break;
                 case '4':
                     clearScreen();
+                    rk.ordenarRanking();
                     rk.showBestPlayer();
                     pressENTER();
                     clearScreen();

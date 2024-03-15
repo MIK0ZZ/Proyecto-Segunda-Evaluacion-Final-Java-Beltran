@@ -69,7 +69,7 @@ public class Record {
         System.out.println("----TOP10----");
         
 
-        for(int i = 0; i<top10.size(); i++) {
+        for(int i = 0; i<10; i++) {
             System.out.println(i+1 + ". " +top10.get(i).getName() + " = " + top10.get(i).getPuntos());
         }
         System.out.println("-------------");
@@ -96,7 +96,7 @@ public class Record {
     public void showBestPlayer() {
         System.out.println("---SinMujeres----");
         for(int i = 0; i<top10.size(); i++) {
-            if(top10.get(i).getPuntos() == 470) {
+            if(top10.get(i).getPuntos() == top10.get(0).getPuntos()) {
                 System.out.println(i+1 + ". " +top10.get(i).getName() + " = " + top10.get(i).getPuntos());
             }
             
