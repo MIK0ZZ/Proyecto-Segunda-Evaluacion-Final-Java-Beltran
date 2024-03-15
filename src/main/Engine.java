@@ -149,7 +149,7 @@ public class Engine {
         Scanner sc = new Scanner(System.in);
         Player player = new Player("default",0);
         Record rk = new Record();
-        rk.addPlayerRanking(player);
+        
             
         System.out.print("Cual es tu nombre?: ");
         String name = sc.next();
@@ -159,6 +159,7 @@ public class Engine {
         while (_stop == false) {
             
             rk.cargarRanking();
+            rk.addPlayerRanking(player);
             clearScreen();
             System.out.println("Puntos actuales: " + player.getPuntos());
             System.out.println("----------------------");
