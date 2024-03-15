@@ -14,7 +14,7 @@ El javadoc se encuentra en la carpeta "javadoc".
 - VSCode
 
 ## Instalación
-Clona el repositorio y abrelo con VSCode.
+Clona el repositorio y ábrelo con VSCode.
 
 ## Imagen del Proyecto
 ![Foto](./media/image.png)
