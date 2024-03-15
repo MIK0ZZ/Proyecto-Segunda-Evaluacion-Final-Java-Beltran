@@ -1,8 +1,20 @@
 # SIMÓN DICE JAVA
-## BELTRÁN GONZÁLEZ MARTOS
-ZMiK0_
 
 ## Descripción
-Este es el proyecto de la segunda evaluación asignatura de java.
+**Autor**: Beltrán ***ZMiK0_*** González Martos.
+**Basado en**: Documentación Proyecto Java Segundo Trimestre _Jonathan Carrero_.
 
-Cuando este terminado subiré aquí el javadoc.
+Este es mi proyecto de la segunda evaluación de la asignatura de java construido con mi sudor y lágrimas.
+
+## Documentación
+El javadoc se encuentra en la carpeta "javadoc"
+
+## Dependencias
+- JDK21
+- VSCode
+
+## Instalación
+Clona el repositorio y abrelo con VSCode.
+
+## Imagen del Proyecto
+![Foto](./media/image.png)
