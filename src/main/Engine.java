@@ -148,13 +148,7 @@ public class Engine {
 
         Scanner sc = new Scanner(System.in);
         Player player = new Player("default",0);
-        Player uno = new Player("Tete", 470);
-        Player dos = new Player("Maria", 200);
-        Player tres = new Player("Pedro", 12);
         Record rk = new Record();
-        rk.addPlayerRanking(uno);
-        rk.addPlayerRanking(dos);
-        rk.addPlayerRanking(tres);
         rk.addPlayerRanking(player);
             
         System.out.print("Cual es tu nombre?: ");
@@ -164,7 +158,7 @@ public class Engine {
 
         while (_stop == false) {
             
-            
+            rk.cargarRanking();
             clearScreen();
             System.out.println("Puntos actuales: " + player.getPuntos());
             System.out.println("----------------------");
@@ -194,6 +188,7 @@ public class Engine {
                     break;
                 case '3':
                     clearScreen();
+                    rk.ordenarRanking();
                     rk.showRanking();
                     pressENTER();
                     clearScreen();

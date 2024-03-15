@@ -1,11 +1,35 @@
 package main;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import files.CustomReadFile;
 
 public class Record {
     private final int MAX_JUGADORES = 10;
     ArrayList<Player> top10 = new ArrayList<Player>(MAX_JUGADORES);
+    File file = new File("./src/data/top.txt");
     
     
+    /**
+     * Carga el ranking.
+     */
+    @SuppressWarnings("unchecked")
+    public void cargarRanking() {
+        try (CustomReadFile crf = new CustomReadFile(file)) {
+            this.top10 = crf.leerJugadores();
+            crf.closeReadFile();
+        } catch (FileNotFoundException e) {
+            System.out.println("El archivo no se encontró.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+         
+    }
+
+
     /** 
      * @param _player añade un jugador al ranking
      */
